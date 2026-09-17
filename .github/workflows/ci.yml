@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test
+        run: >-
+          xcodebuild test
+          -scheme swift-snapshot-testing-watchos
+          -destination 'platform=watchOS Simulator,name=Apple Watch Ultra 3 (49mm)'
